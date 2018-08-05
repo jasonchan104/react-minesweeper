@@ -1,0 +1,13 @@
+.grid-button {
+    height: 20px;
+    width: 20px;
+    /* display: inline-block; */
+}
+
+.grid-value {
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+    border: 1px groove;
+}
