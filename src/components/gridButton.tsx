@@ -2,8 +2,10 @@ import './minesweeper.css';
 
 import * as React from 'react';
 
+import { GridValue } from '../model';
+
 interface GridButtonProps {
-    value: number;
+    gridValue: GridValue;
 }
 
 interface GridButtonState {
@@ -25,7 +27,7 @@ export class GridButton extends React.Component<GridButtonProps, GridButtonState
 
     render() {
         if (this.state.clicked) {
-            return <div className="grid-value">{this.props.value}</div>;
+            return <div className="grid-value">{this.props.gridValue.value}</div>;
         } else {
             return <button className="grid-button" onClick={() => this.onClickHandler()} />;
         }

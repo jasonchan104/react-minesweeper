@@ -1,3 +1,7 @@
+.grid {
+    width: 190px;
+}
+
 .grid-button {
     height: 20px;
     width: 20px;
@@ -5,8 +9,8 @@
 }
 
 .grid-value {
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
     text-align: center;
     display: inline-block;
     border: 1px groove;
