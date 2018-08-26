@@ -1,0 +1,20 @@
+----TODO----
+- add first click logic
+    - first click should not have a mine
+    - cells adjacent should not have a mine
+
+- add logic to open adjacent cells when the clicked cell's value is 0
+
+- right click to place flag.
+    - button should be disabled after
+
+- fix css (button and value textbox size is different)
+
+- create unit tests
+
+----Extra----
+- beautify css
+- add counter for number of mines left (subtract total mines from number of flags)
+- add timer
+- add reset game button
+

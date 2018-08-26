@@ -27,7 +27,10 @@ export class GridButton extends React.Component<GridButtonProps, GridButtonState
 
     render() {
         if (this.state.clicked) {
-            return <div className="grid-value">{this.props.gridValue.value}</div>;
+            if (this.props.gridValue.isMine())
+                return <div className="grid-value">M</div>;
+            else
+                return <div className="grid-value">{this.props.gridValue.value}</div>;
         } else {
             return <button className="grid-button" onClick={() => this.onClickHandler()} />;
         }
