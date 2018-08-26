@@ -21,8 +21,8 @@ export class GridComponent extends React.Component<any, GridState> {
             let x: number;
             let y: number;
             do {
-                x = Math.round(Math.random() * numRows);
-                y = Math.round(Math.random() * numColumns);
+                x = Math.round(Math.random() * numColumns);
+                y = Math.round(Math.random() * numRows);
             } while (!grid.setMine(x, y));
             console.log(x.toString() + "," + y.toString())
         }
@@ -34,12 +34,10 @@ export class GridComponent extends React.Component<any, GridState> {
 
         const grid = this.state.grid;
         const gridButtons: JSX.Element[] = [];
-        for (let row = grid.rows-1; 0 <= row; row--) {
-
+        for (let row = grid.rows - 1; 0 <= row; row--) {
             const rowButtons: JSX.Element[] = [];
             for (let column = 0; column < grid.columns; column++) {
-
-                rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={grid.get(row, column)} />);
+                rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={grid.get(column, row)} />);
             }
             gridButtons.push(<div key={row}>{rowButtons}</div>);
         }
