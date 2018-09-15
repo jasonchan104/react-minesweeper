@@ -1,38 +1,17 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 
+import { Grid, Store } from '../model';
 import { GridButton } from './';
-import { Grid } from '../model';
 
-interface GridState {
+interface GridComponentStateProps {
     grid: Grid;
 }
 
-export class GridComponent extends React.Component<any, GridState> {
-
-    constructor(props: any) {
-        super(props)
-
-        const numRows = 2;
-        const numColumns = 5;
-        const numMines = 3;
-        const grid = new Grid(numRows, numColumns);
-
-        for (let i = 0; i < numMines; i++) {
-            let x: number;
-            let y: number;
-            do {
-                x = Math.round(Math.random() * numColumns);
-                y = Math.round(Math.random() * numRows);
-            } while (!grid.setMine(x, y));
-            console.log(x.toString() + "," + y.toString())
-        }
-
-        this.state = { grid: grid };
-    }
+export class GridComponentView extends React.Component<GridComponentStateProps, any> {
 
     render() {
-
-        const grid = this.state.grid;
+        const grid = this.props.grid;
         const gridButtons: JSX.Element[] = [];
         for (let row = grid.rows - 1; 0 <= row; row--) {
             const rowButtons: JSX.Element[] = [];
@@ -49,3 +28,11 @@ export class GridComponent extends React.Component<any, GridState> {
         );
     }
 }
+
+function mapStateToProps(state: Store): GridComponentStateProps {
+    return {
+        grid: state.grid
+    }
+}
+
+export const GridComponent = connect(mapStateToProps)(GridComponentView);

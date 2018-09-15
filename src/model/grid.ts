@@ -11,17 +11,30 @@ export class Grid {
      * @constructor
      * @param rows total number of rows in grid
      * @param columns total number of columns in grid
+     * @param numMines total number of mines in grid
     */
-    constructor(rows: number, columns: number) {
+    constructor(rows: number, columns: number, numMines: number) {
         this.rows = rows;
         this.columns = columns;
 
+        // initialize grid
         this.grid = new Array(columns);
         for (let i = 0; i < columns; i++) {
             this.grid[i] = new Array(rows);
             for (let j = 0; j < rows; j++) {
                 this.grid[i][j] = new GridValue(i, j);
             }
+        }
+
+        // Set mines
+        for (let i = 0; i < numMines; i++) {
+            let x: number;
+            let y: number;
+            do {
+                x = Math.round(Math.random() * columns);
+                y = Math.round(Math.random() * rows);
+            } while (!this.setMine(x, y));
+            console.log(x.toString() + "," + y.toString())
         }
     }
 
