@@ -19,7 +19,7 @@ export class GridComponentView extends React.Component<GridComponentStateProps, 
             const rowButtons: JSX.Element[] = [];
             for (let column = 0; column < grid.columns; column++) {
                 const cell = getCell(grid, column, row);
-                rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={cell} open={cell.open} disabled={gameOver} />);
+                rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={cell} open={cell.open} flag={cell.flag} disabled={gameOver} />);
             }
             gridButtons.push(<div key={row}>{rowButtons}</div>);
         }

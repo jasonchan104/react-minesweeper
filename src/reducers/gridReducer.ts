@@ -1,6 +1,7 @@
+import { FLAG_CELL } from './../actions/actionTypes';
 import { Grid } from "../model";
 import { GRID_SETUP, OPEN_ADJACENT_CELLS, OPEN_CELL } from "../actions";
-import { openAdjacentCells, openCell } from "../utils";
+import { openAdjacentCells, openCell, flagCell } from "../utils";
 
 export function gridReducer(state: Grid, action: { type: String, payload: any }): any {
     let newState: Grid;
@@ -22,6 +23,11 @@ export function gridReducer(state: Grid, action: { type: String, payload: any })
             x = action.payload.x;
             y = action.payload.y;
             return openCell(newState, x, y);
+        case FLAG_CELL:
+            newState = { ...state };
+            x = action.payload.x;
+            y = action.payload.y;
+            return flagCell(newState, x, y);
         default:
             return {};
     }

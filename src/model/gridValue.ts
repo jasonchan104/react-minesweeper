@@ -4,6 +4,7 @@ export class GridValue {
     value: number;
     mine: boolean;
     open: boolean;
+    flag: boolean;
 
     constructor(x: number, y: number) {
         this.x = x;
@@ -11,6 +12,7 @@ export class GridValue {
         this.value = 0;
         this.mine = false;
         this.open = false;
+        this.flag = false;
     }
 
     increment() {
@@ -27,5 +29,9 @@ export class GridValue {
 
     hasNoAdjacentMine() {
         return this.value == 0;
+    }
+
+    isFlag() {
+        return this.flag;
     }
 }

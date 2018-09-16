@@ -12,4 +12,8 @@ export namespace Actions {
     export function openCell(x: number, y: number): { type: string, payload: { x: number, y: number } } {
         return { type: ActionTypes.OPEN_CELL, payload: { x, y } };
     }
+
+    export function flagCell(x: number, y: number): { type: string, payload: { x: number, y: number } } {
+        return { type: ActionTypes.FLAG_CELL, payload: { x, y } };
+    }
 }

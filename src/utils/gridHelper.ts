@@ -55,3 +55,11 @@ export function openCell(grid: Grid, x: number, y: number): Grid {
     return grid;
 }
 
+export function flagCell(grid: Grid, x: number, y: number): Grid {
+    if (isInGrid(grid, x, y)) {
+        const cell = grid.cells[x][y];
+        cell.flag = !cell.flag;
+    }
+    return grid;
+}
+
