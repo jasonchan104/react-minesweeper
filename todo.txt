@@ -3,10 +3,10 @@
     - first click should not have a mine
     - cells adjacent should not have a mine
 
-- add logic to open adjacent cells when the clicked cell's value is 0
-
 - right click to place flag.
     - button should be disabled after
+
+- move number of rows, columns, mines out of reducer
 
 - fix css (button and value textbox size is different)
 
