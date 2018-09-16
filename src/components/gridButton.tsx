@@ -10,6 +10,7 @@ import { Actions } from '../actions';
 export interface GridButtonProps {
     gridValue: GridValue;
     open: boolean;
+    disabled: boolean;
 }
 
 export interface GridButtonDispatchProps {
@@ -36,7 +37,7 @@ class GridButtonComponent extends React.Component<GridButtonProps & GridButtonDi
             else
                 return <div className="grid-value">{this.props.gridValue.value}</div>;
         } else {
-            return <button className="grid-button" onClick={() => this.onClickHandler()} />;
+            return <button className="grid-button" disabled={this.props.disabled} onClick={() => this.onClickHandler()} />;
         }
     }
 }
