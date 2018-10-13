@@ -20,40 +20,34 @@ export interface GridButtonDispatchProps {
     flagCell: (x: number, y: number) => any;
 }
 
-class GridButtonComponent extends React.Component<GridButtonProps & GridButtonDispatchProps, any> {
-
-    constructor(props: GridButtonProps & GridButtonDispatchProps) {
-        super(props);
-        this.onClickHandler = this.onClickHandler.bind(this);
-        this.onRightClickHandler = this.onRightClickHandler.bind(this);
-    }
-
-    private onClickHandler() {
-        const gridValue = this.props.gridValue;
-        this.props.openCell(gridValue.x, gridValue.y);
-    }
-
-    private onRightClickHandler(e: any) {
-        e.preventDefault();
-        const gridValue = this.props.gridValue;
-        this.props.flagCell(gridValue.x, gridValue.y);
-    }
-
-    render() {
-        const cell = this.props.gridValue;
-        if (this.props.open) {
-            if (cell.isMine())
-                return <div className="grid-value">M</div>;
-            else
-                return <div className="grid-value">{cell.value}</div>;
+const GridButtonComponent = (props: GridButtonProps & GridButtonDispatchProps) => {
+    const cell = props.gridValue;
+    if (props.open) {
+        if (cell.isMine())
+            return <div className="grid-value">M</div>;
+        else
+            return <div className="grid-value">{cell.value}</div>;
+    } else {
+        if (props.flag) {
+            return <button style={{ backgroundColor: "red" }} className="grid-button"
+                onContextMenu={(e: any) => onRightClickHandler(e, props.gridValue, props.flagCell)}
+            />;
         } else {
-            if (this.props.flag) {
-                return <button style={{ backgroundColor: "red" }} className="grid-button" onContextMenu={this.onRightClickHandler} />;
-            } else {
-                return <button className="grid-button" disabled={this.props.disabled} onClick={this.onClickHandler} onContextMenu={this.onRightClickHandler} />;
-            }
+            return <button className="grid-button" disabled={props.disabled}
+                onClick={_ => onClickHandler(props.gridValue, props.openCell)}
+                onContextMenu={(e: any) => onRightClickHandler(e, props.gridValue, props.flagCell)}
+            />;
         }
     }
+}
+
+function onClickHandler(gridValue: GridValue, openCell: (x: number, y: number) => any) {
+    openCell(gridValue.x, gridValue.y);
+}
+
+function onRightClickHandler(e: any, gridValue: GridValue, flagCell: (x: number, y: number) => any) {
+    e.preventDefault();
+    flagCell(gridValue.x, gridValue.y);
 }
 
 function mapDispatchToProps(dispatch: Dispatch): GridButtonDispatchProps {
