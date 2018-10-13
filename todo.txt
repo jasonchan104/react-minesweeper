@@ -1,7 +1,6 @@
 ----TODO----
-- add first click logic
-    - first click should not have a mine
-    - cells adjacent should not have a mine
+- add win condition
+    - all non-mine cells opened
 
 - move number of rows, columns, mines out of reducer
 
@@ -13,5 +12,4 @@
 - beautify css
 - add counter for number of mines left (subtract total mines from number of flags)
 - add timer
-- add reset game button
-
+- add webpack?

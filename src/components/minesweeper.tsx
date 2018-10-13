@@ -6,19 +6,20 @@ import { GridComponent } from './';
 import { Actions } from '../actions';
 
 interface GridComponentDispatchProps {
-    gridSetup: () => any;
+    gameSetup: () => any;
 }
 
 export class MinesweeperView extends React.Component<GridComponentDispatchProps, any> {
 
     componentDidMount() {
-        this.props.gridSetup();
+        this.props.gameSetup();
     }
 
     render() {
         return (
             <div>
                 <GridComponent />
+                <button onClick={this.props.gameSetup}>Restart</button>
             </div>
         );
     }
@@ -26,7 +27,10 @@ export class MinesweeperView extends React.Component<GridComponentDispatchProps,
 
 function mapDispatchToProps(dispatch: Dispatch): GridComponentDispatchProps {
     return {
-        gridSetup: () => { dispatch(Actions.gridSetup()) }
+        gameSetup: () => {
+            dispatch(Actions.gameSetup());
+            dispatch(Actions.gridSetup())
+        }
     }
 }
 

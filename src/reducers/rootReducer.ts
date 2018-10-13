@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-
-import { gridReducer } from './';
+import { gameStateReducer, gridReducer } from './';
 
 export const rootReducer = combineReducers({
+    gameState: gameStateReducer,
     grid: gridReducer
 });

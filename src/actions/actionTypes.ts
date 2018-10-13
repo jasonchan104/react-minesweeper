@@ -1,4 +1,7 @@
+export const FIRST_CLICK = 'FIRST_CLICK';
 export const FLAG_CELL = 'FLAG_CELL';
+export const GAME_SETUP = 'GAME_SETUP';
 export const GRID_SETUP = 'GRID_SETUP';
+export const GRID_SETUP_WITH_SAFE_SPOT = 'GRID_SETUP_WITH_SAFE_SPOT';
 export const OPEN_ADJACENT_CELLS = 'OPEN_ADJACENT_CELLS';
 export const OPEN_CELL = 'OPEN_CELL';

@@ -3,24 +3,30 @@ import './minesweeper.css';
 import * as React from 'react';
 
 import { connect } from 'react-redux';
-import { GridValue } from '../model';
+import { GridValue, Store, GameState } from '../model';
 import { Dispatch } from '../../node_modules/redux';
 import { Actions } from '../actions';
 
-export interface GridButtonProps {
+interface GridButtonProps {
     gridValue: GridValue;
     open: boolean;
     flag: boolean;
     disabled: boolean;
 }
 
-export interface GridButtonDispatchProps {
-    openAdjacentCells: (x: number, y: number) => any;
-    openCell: (x: number, y: number) => any;
-    flagCell: (x: number, y: number) => any;
+interface GridButtonStateProps {
+    gameState: GameState;
 }
 
-const GridButtonComponent = (props: GridButtonProps & GridButtonDispatchProps) => {
+interface GridButtonDispatchProps {
+    gridSetup: (x: number, y: number) => any;
+    firstClick: () => any;
+    flagCell: (x: number, y: number) => any;
+    openAdjacentCells: (x: number, y: number) => any;
+    openCell: (x: number, y: number) => any;
+}
+
+const GridButtonComponent = (props: GridButtonProps & GridButtonStateProps & GridButtonDispatchProps) => {
     const cell = props.gridValue;
     if (props.open) {
         if (cell.isMine())
@@ -34,15 +40,22 @@ const GridButtonComponent = (props: GridButtonProps & GridButtonDispatchProps) =
             />;
         } else {
             return <button className="grid-button" disabled={props.disabled}
-                onClick={_ => onClickHandler(props.gridValue, props.openCell)}
+                onClick={_ => onClickHandler(props)}
                 onContextMenu={(e: any) => onRightClickHandler(e, props.gridValue, props.flagCell)}
             />;
         }
     }
 }
 
-function onClickHandler(gridValue: GridValue, openCell: (x: number, y: number) => any) {
-    openCell(gridValue.x, gridValue.y);
+function onClickHandler(props: GridButtonProps & GridButtonStateProps & GridButtonDispatchProps) {
+    const x = props.gridValue.x;
+    const y = props.gridValue.y
+    if (props.gameState.firstClick) {
+        // create grid, set firstClick to false
+        props.gridSetup(x, y);
+        props.firstClick();
+    }
+    props.openCell(x, y);
 }
 
 function onRightClickHandler(e: any, gridValue: GridValue, flagCell: (x: number, y: number) => any) {
@@ -50,12 +63,18 @@ function onRightClickHandler(e: any, gridValue: GridValue, flagCell: (x: number,
     flagCell(gridValue.x, gridValue.y);
 }
 
+function mapStateToProps(state: Store): GridButtonStateProps {
+    return { gameState: state.gameState };
+}
+
 function mapDispatchToProps(dispatch: Dispatch): GridButtonDispatchProps {
     return {
+        gridSetup: (x: number, y: number) => dispatch(Actions.gridSetupWithSafeSpot(x, y)),
+        firstClick: () => dispatch(Actions.firstClick()),
+        flagCell: (x: number, y: number) => dispatch(Actions.flagCell(x, y)),
         openAdjacentCells: (x: number, y: number) => dispatch(Actions.openAdjacentCells(x, y)),
         openCell: (x: number, y: number) => dispatch(Actions.openCell(x, y)),
-        flagCell: (x: number, y: number) => dispatch(Actions.flagCell(x, y)),
     }
 }
 
-export const GridButton = connect(null, mapDispatchToProps)(GridButtonComponent);
+export const GridButton = connect(mapStateToProps, mapDispatchToProps)(GridButtonComponent);

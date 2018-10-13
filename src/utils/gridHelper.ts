@@ -1,5 +1,16 @@
 import { Grid, GridValue } from "../model";
 
+export function adjacentToSafeSpot(x: number, y: number, safeX: number, safeY: number): boolean {
+    for (let i = safeX - 1; i < safeX + 2; i++) {
+        for (let j = safeY - 1; j < safeY + 2; j++) {
+            if (x == i && y == j) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 export function getCell(grid: Grid, x: number, y: number): GridValue {
     if (isInGrid(grid, x, y)) {
         return grid.cells[x][y];

@@ -1,5 +1,5 @@
 import { GridValue } from ".";
-import { setMine } from "../utils";
+import { setMine, adjacentToSafeSpot } from "../utils";
 
 export class Grid {
 
@@ -14,8 +14,10 @@ export class Grid {
      * @param rows total number of rows in grid
      * @param columns total number of columns in grid
      * @param numMines total number of mines in grid
+     * @param safeX cells adjacent to (safeX, safeY) should not contain a mine
+     * @param safeY
     */
-    constructor(rows: number, columns: number, numMines: number) {
+    constructor(rows: number, columns: number, numMines: number, safeX = -10, safeY = -10) {
         this.rows = rows;
         this.columns = columns;
         this.openMine = false;
@@ -36,8 +38,7 @@ export class Grid {
             do {
                 x = Math.round(Math.random() * columns);
                 y = Math.round(Math.random() * rows);
-            } while (!setMine(this, x, y));
-            console.log(x.toString() + "," + y.toString())
+            } while (!adjacentToSafeSpot(x, y, safeX, safeY) && !setMine(this, x, y));
         }
     }
 }
