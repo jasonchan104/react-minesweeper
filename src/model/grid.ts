@@ -6,8 +6,10 @@ export class Grid {
     // columns = max x-value, rows = max y-value
     rows: number;
     columns: number;
+    numMines: number;
     cells: GridValue[][];
     openMine: boolean;
+    openedCells: number;
 
     /**
      * @constructor
@@ -20,7 +22,9 @@ export class Grid {
     constructor(rows: number, columns: number, numMines: number, safeX = -10, safeY = -10) {
         this.rows = rows;
         this.columns = columns;
+        this.numMines = numMines;
         this.openMine = false;
+        this.openedCells = 0;
 
         // initialize grid
         this.cells = new Array(columns);
@@ -36,9 +40,9 @@ export class Grid {
             let x: number;
             let y: number;
             do {
-                x = Math.round(Math.random() * columns);
-                y = Math.round(Math.random() * rows);
-            } while (!adjacentToSafeSpot(x, y, safeX, safeY) && !setMine(this, x, y));
+                x = Math.round(Math.random() * (columns - 1));
+                y = Math.round(Math.random() * (rows - 1));
+            } while (adjacentToSafeSpot(x, y, safeX, safeY) || !setMine(this, x, y));
         }
     }
 }

@@ -56,6 +56,7 @@ export function openCell(grid: Grid, x: number, y: number): Grid {
         const cell = grid.cells[x][y];
         if (!cell.open) {
             cell.open = true;
+            grid.openedCells++;
             if (cell.isMine()) {
                 grid.openMine = true;
             } else if (cell.hasNoAdjacentMine()) {
@@ -74,3 +75,6 @@ export function flagCell(grid: Grid, x: number, y: number): Grid {
     return grid;
 }
 
+export function gameWon(grid: Grid): boolean {
+    return grid.openedCells == grid.rows * grid.columns - grid.numMines;
+}

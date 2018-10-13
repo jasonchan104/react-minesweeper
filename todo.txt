@@ -1,7 +1,4 @@
 ----TODO----
-- add win condition
-    - all non-mine cells opened
-
 - move number of rows, columns, mines out of reducer
 
 - fix css (button and value textbox size is different)

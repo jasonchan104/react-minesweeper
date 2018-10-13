@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Grid, Store } from '../model';
 import { GridButton } from './';
-import { getCell } from '../utils';
+import { gameWon, getCell } from '../utils';
 
 interface GridComponentStateProps {
     grid: Grid;
@@ -12,12 +12,13 @@ interface GridComponentStateProps {
 const GridComponentView = (props: GridComponentStateProps) => {
     const grid = props.grid;
     const gameOver = grid.openMine;
+    const win = gameWon(grid);
     const gridButtons: JSX.Element[] = [];
     for (let row = grid.rows - 1; 0 <= row; row--) {
         const rowButtons: JSX.Element[] = [];
         for (let column = 0; column < grid.columns; column++) {
             const cell = getCell(grid, column, row);
-            rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={cell} open={cell.open} flag={cell.flag} disabled={gameOver} />);
+            rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={cell} open={cell.open} flag={cell.flag} disabled={gameOver || win} />);
         }
         gridButtons.push(<div key={row}>{rowButtons}</div>);
     }
@@ -25,6 +26,8 @@ const GridComponentView = (props: GridComponentStateProps) => {
     let text: JSX.Element = null;
     if (gameOver) {
         text = <p>Game Over</p>;
+    } else if (win) {
+        text = <p>Winner!</p>;
     }
 
     return (
