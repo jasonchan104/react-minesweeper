@@ -9,4 +9,3 @@
 - beautify css
 - add counter for number of mines left (subtract total mines from number of flags)
 - add timer
-- add webpack?
