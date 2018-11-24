@@ -9,3 +9,5 @@
 - beautify css
 - add counter for number of mines left (subtract total mines from number of flags)
 - add timer
+- see if its possible to remove sass files and sass loader from webpack
+- only import necessary icons from font awesome

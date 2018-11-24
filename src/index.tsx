@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 
 import { Minesweeper } from './components';
 import { rootReducer } from './reducers';
+import './styles.scss';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

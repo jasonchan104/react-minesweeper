@@ -20,7 +20,7 @@ const GridComponentView = (props: GridComponentStateProps) => {
             const cell = getCell(grid, column, row);
             rowButtons.push(<GridButton key={`${row}, ${column}`} gridValue={cell} open={cell.open} flag={cell.flag} disabled={gameOver || win} />);
         }
-        gridButtons.push(<div key={row}>{rowButtons}</div>);
+        gridButtons.push(<div key={row} className="buttons has-addons is-marginless is-centered">{rowButtons}</div>);
     }
 
     let text: JSX.Element = null;

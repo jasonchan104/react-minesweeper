@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 
 import { GridComponent } from './';
 import { Actions } from '../actions';
+import './minesweeper.scss';
 
 interface GridComponentDispatchProps {
     gameSetup: () => any;
@@ -19,7 +20,7 @@ export class MinesweeperView extends React.Component<GridComponentDispatchProps,
         return (
             <div>
                 <GridComponent />
-                <button onClick={this.props.gameSetup}>Restart</button>
+                <button className="button is-primary" onClick={this.props.gameSetup}>Restart</button>
             </div>
         );
     }

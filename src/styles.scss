@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+.button[disabled] {
+    cursor: initial !important;
+}
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/elements/button";
