@@ -9,7 +9,7 @@ interface GridComponentStateProps {
     grid: Grid;
 }
 
-const GridComponentView = (props: GridComponentStateProps) => {
+function GridComponentView(props: GridComponentStateProps) {
     const grid = props.grid;
     const gameOver = grid.openMine;
     const win = gameWon(grid);
@@ -41,9 +41,7 @@ const GridComponentView = (props: GridComponentStateProps) => {
 }
 
 function mapStateToProps(state: Store): GridComponentStateProps {
-    return {
-        grid: state.grid
-    }
+    return { grid: state.grid };
 }
 
 export const GridComponent = connect(mapStateToProps)(GridComponentView);

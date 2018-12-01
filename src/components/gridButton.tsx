@@ -24,7 +24,7 @@ interface GridButtonDispatchProps {
     openCell: (x: number, y: number) => any;
 }
 
-const GridButtonComponent = (props: GridButtonProps & GridButtonStateProps & GridButtonDispatchProps) => {
+function GridButtonComponent(props: GridButtonProps & GridButtonStateProps & GridButtonDispatchProps) {
     const cell = props.gridValue;
     if (props.open) {
         let icon: JSX.Element;
@@ -35,7 +35,7 @@ const GridButtonComponent = (props: GridButtonProps & GridButtonStateProps & Gri
         } else {
             const cellText = cell.value == 0 ? "" : cell.value;
             const cellColour = getCellTextColour(cellText)
-            icon = <span className={`icon ${cellColour} has-text-weight-bold}`}>
+            icon = <span className={`icon ${cellColour} has-text-weight-bold`}>
                 {cellText}
             </span>;
         }
