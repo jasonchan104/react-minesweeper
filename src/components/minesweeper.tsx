@@ -37,11 +37,20 @@ export class MinesweeperView extends React.Component<MinesweeperStateProps & Min
 
         return (
             <div className="container">
-                <progress className={`progress is-small progress-layout ${progessColourClass}`} value={grid.openedCells} max={totalSafeCells} />
+                <div className="toolbar">
+                    <div>
+                        <button className="button is-primary" onClick={() => this.props.gameSetup(this.props.gameState.difficulty)}>New Game</button>
+                        <OptionsMenu difficulty={this.props.gameState.difficulty} />
+                        <div className="mine-counter">
+                            <span className="icon">
+                                <i className="fas fa-bomb fa-lg"/>
+                            </span>
+                            {` ${grid.numMines - grid.numFlags}`}
+                        </div>
+                    </div>
+                    <progress className={`progress is-small progress-layout ${progessColourClass}`} value={grid.openedCells} max={totalSafeCells} />
+                </div>
                 <GridComponent gameOver={gameOver} win={win} />
-                <button className="button is-primary" onClick={() => this.props.gameSetup(this.props.gameState.difficulty)}>New Game</button>
-                <div>Mines Left: {grid.numMines - grid.numFlags}</div>
-                <OptionsMenu difficulty={this.props.gameState.difficulty} />
             </div>
         );
     }

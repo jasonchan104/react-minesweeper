@@ -1,8 +1,5 @@
 ----TODO----
 
-- fix css
-    - find somewhere to put side buttons
-
 Bugs:
 - when game is over, unopened cells can still be right clicked
 

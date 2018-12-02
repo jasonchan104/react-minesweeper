@@ -1,12 +1,38 @@
 @import "~bulma/sass/utilities/initial-variables";
 
 .progress-layout {
-    width: 300px !important;
     margin: 10px auto !important;
+}
+
+.toolbar {
+    margin: 10px auto;
+    width: 320px;
+
+    >div {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    
+        > * {
+            margin-right: 10px;
+        }
+
+        .mine-counter {
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            cursor: default;
+            padding: 5px;
+            margin: 0px;
+            width: 60px;
+        }
+    }
+
 }
 
 .dropdown {
     .dropdown-button {
+        cursor: default;
         width: 135px;
     }
 
