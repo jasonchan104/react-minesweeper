@@ -43,17 +43,17 @@ function GridButtonComponent(props: GridButtonProps & GridButtonStateProps & Gri
             {icon}
         </div>;
     } else {
+        const flagCell = (props.disabled) ? disableContextMenu : (e: any) => onRightClickHandler(e, props.gridValue, props.flagCell);
         if (props.flag) {
             return <button className="button is-small is-marginless" disabled={props.disabled}
-                onContextMenu={(e: any) => onRightClickHandler(e, props.gridValue, props.flagCell)}>
+                onContextMenu={flagCell}>
                 <span className="icon">
                     <i className="fas fa-flag fa-lg has-text-red"></i>
                 </span>
             </button>;
         } else {
             return <button className="button is-small is-outlined is-marginless" disabled={props.disabled}
-                onClick={_ => onClickHandler(props)}
-                onContextMenu={(e: any) => onRightClickHandler(e, props.gridValue, props.flagCell)}>
+                onClick={() => onClickHandler(props)} onContextMenu={flagCell}>
                 <span className="icon" />
             </button>;
         }
@@ -72,8 +72,12 @@ function onClickHandler(props: GridButtonProps & GridButtonStateProps & GridButt
 }
 
 function onRightClickHandler(e: any, gridValue: GridValue, flagCell: (x: number, y: number) => any) {
-    e.preventDefault();
+    disableContextMenu(e);
     flagCell(gridValue.x, gridValue.y);
+}
+
+function disableContextMenu(e: any) {
+    e.preventDefault();
 }
 
 function getCellTextColour(cellText: number | string): string {
