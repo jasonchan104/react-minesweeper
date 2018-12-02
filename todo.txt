@@ -1,13 +1,11 @@
 ----TODO----
-- move number of rows, columns, mines out of reducer
 
-- fix css (button and value textbox size is different)
+- fix css
+    - find somewhere to put side buttons
 
-- create unit tests
+Bugs:
+- when game is over, unopened cells can still be right clicked
 
 ----Extra----
-- beautify css
-- add counter for number of mines left (subtract total mines from number of flags)
-- add timer
 - see if its possible to remove sass files and sass loader from webpack
 - only import necessary icons from font awesome

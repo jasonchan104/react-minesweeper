@@ -1,12 +1,17 @@
-import { GAME_SETUP, FIRST_CLICK } from "../actions";
+import { CHANGE_DIFFICULTY, GAME_SETUP, FIRST_CLICK } from "../actions";
 import { GameState } from "../model";
 
 export function gameStateReducer(state: GameState, action: { type: String, payload: any }): GameState {
     switch (action.type) {
         case GAME_SETUP:
-            return new GameState();
+            const difficulty = action.payload;
+            return new GameState(difficulty);
+        case CHANGE_DIFFICULTY:
+            let newGameState = { ...state };
+            newGameState.difficulty = action.payload;
+            return newGameState;
         case FIRST_CLICK:
-            const newGameState = { ...state };
+            newGameState = { ...state };
             newGameState.firstClick = false;
             return newGameState;
         default:

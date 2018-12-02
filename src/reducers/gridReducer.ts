@@ -9,16 +9,12 @@ export function gridReducer(state: Grid, action: { type: String, payload: any })
     let y: number;
     switch (action.type) {
         case GRID_SETUP:
-            let numRows = 9;
-            let numColumns = 9;
-            let numMines = 10;
+            let [numRows, numColumns, numMines] = action.payload;
             return new Grid(numRows, numColumns, numMines);
         case GRID_SETUP_WITH_SAFE_SPOT:
+            [numRows, numColumns, numMines] = action.payload.gridSize;
             x = action.payload.x;
             y = action.payload.y;
-            numRows = 9;
-            numColumns = 9;
-            numMines = 10;
             return new Grid(numRows, numColumns, numMines, x, y);
         case OPEN_ADJACENT_CELLS:
             newState = { ...state };

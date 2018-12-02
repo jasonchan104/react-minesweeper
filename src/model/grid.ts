@@ -10,6 +10,7 @@ export class Grid {
     cells: GridValue[][];
     openMine: boolean;
     openedCells: number;
+    numFlags: number;
 
     /**
      * @constructor
@@ -25,6 +26,7 @@ export class Grid {
         this.numMines = numMines;
         this.openMine = false;
         this.openedCells = 0;
+        this.numFlags = 0;
 
         // initialize grid
         this.cells = new Array(columns);

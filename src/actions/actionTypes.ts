@@ -1,3 +1,4 @@
+export const CHANGE_DIFFICULTY = 'CHANGE_DIFFICULTY';
 export const FIRST_CLICK = 'FIRST_CLICK';
 export const FLAG_CELL = 'FLAG_CELL';
 export const GAME_SETUP = 'GAME_SETUP';

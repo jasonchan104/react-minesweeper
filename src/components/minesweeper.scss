@@ -1,5 +1,20 @@
 @import "~bulma/sass/utilities/initial-variables";
 
+.progress-layout {
+    width: 300px !important;
+    margin: 10px auto !important;
+}
+
+.dropdown {
+    .dropdown-button {
+        width: 135px;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+    }
+}
+
 .has-text-red {
     color: $red !important;
 }

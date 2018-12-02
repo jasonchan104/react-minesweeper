@@ -1,9 +1,9 @@
 import * as React from 'react';
-
 import { connect } from 'react-redux';
-import { GridValue, Store, GameState } from '../model';
 import { Dispatch } from '../../node_modules/redux';
 import { Actions } from '../actions';
+import { GameState, GridValue, Store } from '../model';
+import { gridSize } from '../utils';
 
 interface GridButtonProps {
     gridValue: GridValue;
@@ -17,7 +17,7 @@ interface GridButtonStateProps {
 }
 
 interface GridButtonDispatchProps {
-    gridSetup: (x: number, y: number) => any;
+    gridSetup: (gridSize: number[], x: number, y: number) => any;
     firstClick: () => any;
     flagCell: (x: number, y: number) => any;
     openAdjacentCells: (x: number, y: number) => any;
@@ -65,7 +65,7 @@ function onClickHandler(props: GridButtonProps & GridButtonStateProps & GridButt
     const y = props.gridValue.y
     if (props.gameState.firstClick) {
         // create grid, set firstClick to false
-        props.gridSetup(x, y);
+        props.gridSetup(gridSize(props.gameState.difficulty), x, y);
         props.firstClick();
     }
     props.openCell(x, y);
@@ -96,7 +96,7 @@ function mapStateToProps(state: Store): GridButtonStateProps {
 
 function mapDispatchToProps(dispatch: Dispatch): GridButtonDispatchProps {
     return {
-        gridSetup: (x: number, y: number) => dispatch(Actions.gridSetupWithSafeSpot(x, y)),
+        gridSetup: (gridSize: number[], x: number, y: number) => dispatch(Actions.gridSetupWithSafeSpot(gridSize, x, y)),
         firstClick: () => dispatch(Actions.firstClick()),
         flagCell: (x: number, y: number) => dispatch(Actions.flagCell(x, y)),
         openAdjacentCells: (x: number, y: number) => dispatch(Actions.openAdjacentCells(x, y)),

@@ -1,4 +1,4 @@
-import { Grid, GridValue } from "../model";
+import { Grid, GridValue, GameDifficulty } from "../model";
 
 export function adjacentToSafeSpot(x: number, y: number, safeX: number, safeY: number): boolean {
     for (let i = safeX - 1; i < safeX + 2; i++) {
@@ -70,11 +70,26 @@ export function openCell(grid: Grid, x: number, y: number): Grid {
 export function flagCell(grid: Grid, x: number, y: number): Grid {
     if (isInGrid(grid, x, y)) {
         const cell = grid.cells[x][y];
+        (cell.flag) ? grid.numFlags-- : grid.numFlags++;
         cell.flag = !cell.flag;
     }
     return grid;
 }
 
 export function gameWon(grid: Grid): boolean {
-    return grid.openedCells == grid.rows * grid.columns - grid.numMines;
+    return grid.openedCells == numCells(grid) - grid.numMines;
+}
+
+export function numCells(grid: Grid): number {
+    return grid.rows * grid.columns;
+}
+
+/** Returns the number of rows, number of columns, and number of mines in a list */
+export function gridSize(difficulty: GameDifficulty): number[] {
+    switch (difficulty) {
+        case "Beginner": return [9, 9, 10];
+        case "Intermediate": return [16, 16, 40];
+        case "Expert": return [16, 30, 99];
+        default: return [9, 9, 10];
+    }
 }
