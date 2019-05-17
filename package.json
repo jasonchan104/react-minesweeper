@@ -2,7 +2,7 @@
   "name": "react-minesweeper",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://jasonchan104.github.io/react-minesweeper",
+  "homepage": "http://jasonc104.github.io/react-minesweeper",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
